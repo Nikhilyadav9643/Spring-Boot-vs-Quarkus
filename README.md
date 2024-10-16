@@ -40,13 +40,14 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
 - **Spring Boot** is a tool for building Java applications quickly and easily. It comes with built-in features that reduce the need for extensive setup, such as an embedded server to run the application. This allows developers to focus more on writing the main components of their applications instead of worrying about configuration. Spring Boot also supports the creation of fast and responsive applications that can handle numerous requests simultaneously, making it an excellent choice for modern software development.
 
 ### Quarkus (JVM and Native)
-- **Quarkus** is a framework for Java that simplifies building applications tailored for cloud environments. It focuses on making applications lightweight and fast, enabling quick launches and efficient operation in containers. Quarkus accommodates various programming approaches and offers features that enhance the development process, such as instant updates during coding. Its goal is to improve developer productivity while optimizing the performance of applications designed for modern software infrastructures.
+- **Quarkus** is a framework for Java that simplifies building applications tailored for cloud environments. It focuses on making applications lightweight and fast, enabling quick launches and efficient container operation. Quarkus accommodates various programming approaches and offers features that enhance the development process, such as instant updates during coding. Its goal is to improve developer productivity while optimizing the performance of applications designed for modern software infrastructures.
 
 ## 3. Performance Testing with JMeter
 
 ### Test Plan
 1. **Create a Test Plan**:
    - In JMeter, navigate to `File > New` to create a new test plan.
+   -![Create a Test Plan](path/to/create_test_plan_screenshot.png)
 
 2. **Add a Thread Group**:
    - Right-click `Test Plan > Add > Threads (Users) > Thread Group`.
@@ -54,12 +55,14 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
      - **Number of Threads**: Define the number of virtual users (e.g., 50 users).
      - **Ramp-up Period**: Time for all users to start (e.g., 10 seconds).
      - **Loop Count**: Number of times to execute the test (e.g., 10 iterations).
+   -![Add Thread Group](path/to/add_thread_group_screenshot.png)
 
 3. **Add HTTP Request (Optional: For Web Testing)**:
    - Right-click `Thread Group > Add > Sampler > HTTP Request`.
    - Configure the following:
      - **Server Name or IP**: Enter the server address or domain (e.g., localhost).
      - **Path**: Enter the target URL path (e.g., /api/test).
+   -![Add HTTP Request](path/to/add_http_request_screenshot.png)
 
 4. **Add Listeners for Results**:
    - Right-click `Thread Group > Add > Listener`.
@@ -67,11 +70,13 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
      - **View Results Tree**: For detailed information on every request.
      - **Summary Report**: To obtain summary statistics (e.g., throughput, errors).
      - **Graph Results**: To visualize performance trends.
+   -![Add Listeners](path/to/add_listeners_screenshot.png)
 
 5. **Set Up PerfMon for Monitoring CPU, Memory, Disk, etc.**
    - **Install Server Agent on Target Machine**:
      - Download Server Agent from the JMeter Plugins page.
      - Extract the archive on the machine intended for monitoring (typically the target server where the application is hosted).
+     -![Install Server Agent](path/to/install_server_agent_screenshot.png)
 
    - **Start the Server Agent**:
      - On the target server, navigate to the extracted Server Agent directory and execute the following command:
@@ -80,6 +85,7 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
          ./startAgent.sh
          ```
      - By default, the server agent listens on port 4444.
+     -![Start Server Agent](path/to/start_server_agent_screenshot.png)
 
    - **Add PerfMon Metrics Collector in JMeter**:
      - In JMeter, right-click `Thread Group > Add > Listener > jp@gc - PerfMon Metrics Collector`.
@@ -87,11 +93,13 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
        - **Host**: Enter the IP address or hostname of the target server.
        - **Port**: Default is 4444, which must match the Server Agent’s listening port.
        - **Metric to collect**: Select the metric to monitor (e.g., CPU, Memory, Disk I/O, Network).
+     -![Add PerfMon Metrics Collector](path/to/add_perfmon_metrics_collector_screenshot.png)
 
    - **Configure Multiple Metrics**:
      - Multiple rows can be added to monitor different metrics simultaneously:
        - **CPU Usage**: Measures CPU consumption on the target server.
        - **Memory Usage**: Monitors memory consumption.
+     -![Configure Multiple Metrics](path/to/configure_multiple_metrics_screenshot.png)
 
 ### Note
 - This test plan will be used for both applications.
@@ -99,7 +107,8 @@ This project compares how two popular Java frameworks, Spring Boot and Quarkus, 
 ### Execution
 - **Save the Test Plan**: Once the test plan is configured, go to `File > Save` to save the test plan.
 - **Run the Test**: Click the green Start button on the JMeter toolbar. The test will start executing the defined load (virtual users) and will monitor the target server.
-- **Monitor CPU, Memory, and Other Metrics**: The PerfMon Metrics Collector will gather system metrics (e.g., CPU, memory) from the target server.
+Monitor CPU, Memory, and Other Metrics**: The PerfMon Metrics Collector gathers system metrics (e.g., CPU, and memory) from the target server.
+
 
 ## 4. Profiling and Monitoring
 - Tools used (e.g., VisualVM, top, htop) for resource profiling.
